@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website using JSON</title>
+</head>
+<body>
+    
+    <h1>Website using JSON from Djagno</h1>
+
+    <div id="rooms-container">
+        <button id="btn"> Get API </button>
+    </div>
+
+    <script>
+        const button = document.querySelector('#btn')
+        const roomsContainer = document.querySelector('#rooms-container')
+        
+        let getRooms = async () => {
+            let response = await fetch('http://127.0.0.1:8000/api/rooms/')
+            let rooms = await response.json()
+            
+            rooms.forEach(room => {
+                element = `
+                    <div>
+                        <h2>
+                            ${room.name}
+
+                            </h2>
+                        </div>
+                `
+
+                roomsContainer.innerHTML += element;
+            });
+        }
+
+        button.addEventListener('click', getRooms)
+    </script>
+</body>
+</html>
